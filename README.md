@@ -1,7 +1,8 @@
 # Cloudflare KV API 
 
-基于 Hono 构建的 Cloudflare KV 存储接口封装。
+[中文文档](README.md) | [English Doc](README_EN.md)
 
+基于 Hono 构建的 Cloudflare KV 存储接口封装。
 
 ## 技术栈
 
@@ -12,14 +13,14 @@
 
 ## 特性
 
-✅ RESTful API 设计
-✅ 完整的 TypeScript 类型支持
-✅ 请求参数验证（使用 Zod）
-✅ 批量操作支持
-✅ 自动生成的 API 文档
-✅ CORS 支持
-✅ 请求日志
-✅ 错误处理
+✅ RESTful API 设计   
+✅ 完整的 TypeScript 类型支持   
+✅ 请求参数验证（使用 Zod）   
+✅ 批量操作支持   
+✅ 自动生成的 API 文档   
+✅ CORS 支持   
+✅ 请求日志   
+✅ 错误处理   
 
 
 ## 快速开始
@@ -202,7 +203,6 @@ name
     key - value
     ... 
 ...
-
 ```
 
 
