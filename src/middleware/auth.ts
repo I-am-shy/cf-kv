@@ -185,10 +185,12 @@ export const cloudflareAuth = async (c: Context, next: Next) => {
   const apiToken = process.env.CLOUDFLARE_API_TOKEN;
 
   if (!accountId || !apiToken) {
-    return c.json({ error: '缺少 Cloudflare 凭据' }, 500);
+    return c.json({ error: '后台配置缺少 Cloudflare 凭据或 Cloudflare 凭据 配置错误' }, 500);
+  }
+  if(c.req.header("ACCOUNT-ID") !== accountId) {
+    return c.json({ error: 'ACCOUNT-ID 不正确或未配置' }, 401);
   }
 
   c.set('cf', new CloudflareClient(accountId, apiToken));
   await next();
 };
-
