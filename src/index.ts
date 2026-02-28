@@ -15,7 +15,20 @@ app.use('*', logger());
 app.use('*', cors());
 
 // OpenAPI 文档路由（不需要认证）
-app.get('/openapi.json', (c) => c.json(openAPISpec));
+app.get('/openapi.json', (c) =>{
+  openAPISpec.servers = [
+    {
+      url: c.req.url.replace('/openapi.json', ''),
+      description: 'Cloudflare KV server',
+    },
+    {
+      url: 'http://localhost:'+process.env.PORT,
+      description: 'Cloudflare KV local server',
+    }
+  ]
+  return c.json(openAPISpec);
+  
+});
 app.get('/docs', swaggerUI({ url: '/openapi.json' }));
 
 // 健康检查

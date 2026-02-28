@@ -79,14 +79,16 @@ bun run dev
 Started development server: http://localhost:9527
 ```
 
-
-
+>[!TIP]
+> 部署到 Vercel [点击这里](https://vercel.com/new/clone?repository-name=cf-kv&s=https%3A%2F%2Fgithub.com%2FI-am-shy%2Fcf-kv)。
+> vercel 项目中需要配置 env 的环境变量， settings -> Environment Variables -> Add Variable 
 
 ## 项目结构
 
 ```
 cf-kv/
 ├── src/
+│   ├── app.ts           # Vercel 入口
 │   ├── index.ts           # 主入口
 │   ├── server.ts          # Bun 服务器
 │   ├── types.ts          # TypeScript 类型定义
@@ -116,7 +118,9 @@ cf-kv/
 
 #### 获取实例列表
 ```bash
-curl http://localhost:9527/stores
+curl http://localhost:9527/stores \
+  -H "ACCOUNT-ID: your_account_id" 
+
 # 返回: { "stores": [{ "id": "xxx", "title": "my-store" }] }
 ```
 
@@ -124,7 +128,9 @@ curl http://localhost:9527/stores
 ```bash
 curl -X POST http://localhost:9527/stores \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"name": "my-store"}'
+
 # 返回: { "success": true, "id": "xxx" }
 ```
 
@@ -132,7 +138,9 @@ curl -X POST http://localhost:9527/stores \
 ```bash
 curl -X DELETE http://localhost:9527/stores \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"name": "my-store"}'
+
 # 返回: { "success": true }
 ```
 
@@ -147,7 +155,9 @@ curl -X DELETE http://localhost:9527/stores \
 
 #### 获取所有 keys
 ```bash
-curl http://localhost:9527/my-store/kv
+curl http://localhost:9527/my-store/kv \
+  -H "ACCOUNT-ID: your_account_id" \
+
 # 返回: { "keys": ["key1", "key2"] }
 ```
 
@@ -155,7 +165,9 @@ curl http://localhost:9527/my-store/kv
 ```bash
 curl -X POST http://localhost:9527/my-store/kv \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"keys": ["key1", "key2"]}'
+
 # 返回: { "values": [{"key": "key1", "value": "value1"}, {"key": "key2", "value": null}] }
 ```
 
@@ -163,7 +175,9 @@ curl -X POST http://localhost:9527/my-store/kv \
 ```bash
 curl -X DELETE http://localhost:9527/my-store/kv \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"keys": ["key1", "key2"]}'
+
 # 返回: { "deleted": ["key1", "key2"] }
 ```
 
@@ -171,19 +185,22 @@ curl -X DELETE http://localhost:9527/my-store/kv \
 ```bash
 curl -X PUT http://localhost:9527/my-store/kv \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"keys": ["key1", "key2"], "values": ["value1", "value2"]}'
+
 # 返回: { "created": ["key1", "key2"] }
 
 # values 可以有空元素或不传
 curl -X PUT http://localhost:9527/my-store/kv \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"keys": ["key1", "key2"], "values": ["value1", null]}'
 ```
 
 
 ## API 文档
 
-启动服务器后，访问 http://localhost:9527/docs 查看 Swagger UI 文档。
+`bun run dev` 启动本地服务器后，访问 http://localhost:9527/docs 查看 Swagger UI 文档。
 
 此处查看 [API 使用示例](EXAMPLES.md)。
 
