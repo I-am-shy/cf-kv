@@ -13,7 +13,7 @@ export const openAPISpec = {
   servers: [
     {
       url: 'http://localhost:'+process.env.PORT,
-      description: 'Cloudflare KV server',
+      description: 'Cloudflare KV local server',
     },
   ],
   paths: {
@@ -27,6 +27,13 @@ export const openAPISpec = {
             schema: { type: 'string' },
             description: '可选：指定实例名称',
           },
+          {
+            name: 'ACCOUNT-ID',
+            in: 'header',
+            required: true,
+            schema: { type: 'string' },
+            description: 'Cloudflare 账户 ID',
+          }
         ],
         responses: {
           '200': {
@@ -55,6 +62,15 @@ export const openAPISpec = {
       },
       post: {
         summary: '创建存储实例',
+        parameters: [
+          {
+            name: 'ACCOUNT-ID',
+            in: 'header',
+            required: true,
+            schema: { type: 'string' },
+            description: 'Cloudflare 账户 ID',
+          },
+        ],
         requestBody: {
           content: {
             'application/json': {
@@ -87,6 +103,15 @@ export const openAPISpec = {
       },
       delete: {
         summary: '删除存储实例',
+        parameters: [
+          {
+            name: 'ACCOUNT-ID',
+            in: 'header',
+            required: true,
+            schema: { type: 'string' },
+            description: 'Cloudflare 账户 ID',
+          },
+        ],
         requestBody: {
           content: {
             'application/json': {
@@ -127,6 +152,13 @@ export const openAPISpec = {
             required: true,
             schema: { type: 'string' },
           },
+          {
+            name: 'ACCOUNT-ID',
+            in: 'header',
+            required: true,
+            schema: { type: 'string' },
+            description: 'Cloudflare 账户 ID',
+          },
         ],
         responses: {
           '200': {
@@ -155,6 +187,13 @@ export const openAPISpec = {
             in: 'path',
             required: true,
             schema: { type: 'string' },
+          },
+          {
+            name: 'ACCOUNT-ID',
+            in: 'header',
+            required: true,
+            schema: { type: 'string' },
+            description: 'Cloudflare 账户 ID',
           },
         ],
         requestBody: {

@@ -16,12 +16,16 @@ app.use('*', cors());
 
 // OpenAPI 文档路由（不需要认证）
 app.get('/openapi.json', (c) =>{
-  openAPISpec.servers.push(
+  openAPISpec.servers = [
     {
       url: c.req.url.replace('/openapi.json', ''),
       description: 'Cloudflare KV server',
+    },
+    {
+      url: 'http://localhost:'+process.env.PORT,
+      description: 'Cloudflare KV local server',
     }
-  );
+  ]
   return c.json(openAPISpec);
   
 });

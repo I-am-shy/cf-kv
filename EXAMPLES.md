@@ -12,6 +12,7 @@
 ```bash
 curl -X POST http://localhost:9527/stores \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"name": "my-store"}'
 ```
 
@@ -26,7 +27,8 @@ curl -X POST http://localhost:9527/stores \
 ### 2. 获取所有存储实例
 
 ```bash
-curl http://localhost:9527/stores
+curl http://localhost:9527/stores \
+  -H "ACCOUNT-ID: your_account_id"
 ```
 
 响应：
@@ -44,7 +46,8 @@ curl http://localhost:9527/stores
 ### 3. 获取指定存储实例
 
 ```bash
-curl "http://localhost:9527/stores?name=my-store"
+curl "http://localhost:9527/stores?name=my-store"\
+  -H "ACCOUNT-ID: your_account_id"
 ```
 
 ### 4. 删除存储实例
@@ -52,6 +55,7 @@ curl "http://localhost:9527/stores?name=my-store"
 ```bash
 curl -X DELETE http://localhost:9527/stores \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"name": "my-store"}'
 ```
 
@@ -67,7 +71,8 @@ curl -X DELETE http://localhost:9527/stores \
 ### 1. 获取所有 keys
 
 ```bash
-curl http://localhost:9527/my-store/kv
+curl http://localhost:9527/my-store/kv \
+  -H "ACCOUNT-ID: your_account_id" 
 ```
 
 响应：
@@ -116,6 +121,7 @@ curl -X PUT http://localhost:9527/my-store/kv \
 ```bash
 curl -X POST http://localhost:9527/my-store/kv \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{
     "keys": ["key1", "key2", "key3"]
   }'
@@ -137,9 +143,8 @@ curl -X POST http://localhost:9527/my-store/kv \
 ```bash
 curl -X DELETE http://localhost:9527/my-store/kv \
   -H "Content-Type: application/json" \
-  -d '{
-    "keys": ["key1", "key2"]
-  }'
+  -H "ACCOUNT-ID: your_account_id" \
+  -d '{"keys": ["key1", "key2"]}' 
 ```
 
 响应：
@@ -155,32 +160,35 @@ curl -X DELETE http://localhost:9527/my-store/kv \
 # 1. 创建存储实例
 curl -X POST http://localhost:9527/stores \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"name": "user-data"}'
 
 # 2. 添加用户数据
 curl -X PUT http://localhost:9527/user-data/kv \
   -H "Content-Type: application/json" \
-  -d '{
-    "keys": ["user:1", "user:2", "user:3"],
-    "values": ["Alice", "Bob", "Charlie"]
-  }'
+  -H "ACCOUNT-ID: your_account_id" \
+  -d '{"keys": ["user:1", "user:2", "user:3"], "values": ["Alice", "Bob", "Charlie"]}' 
 
 # 3. 查看所有 keys
-curl http://localhost:9527/user-data/kv
+curl http://localhost:9527/user-data/kv \
+  -H "ACCOUNT-ID: your_account_id" 
 
 # 4. 获取特定用户数据
 curl -X POST http://localhost:9527/user-data/kv \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"keys": ["user:1", "user:2"]}'
 
 # 5. 删除用户
 curl -X DELETE http://localhost:9527/user-data/kv \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"keys": ["user:3"]}'
 
 # 6. 清理：删除存储实例
 curl -X DELETE http://localhost:9527/stores \
   -H "Content-Type: application/json" \
+  -H "ACCOUNT-ID: your_account_id" \
   -d '{"name": "user-data"}'
 ```
 
