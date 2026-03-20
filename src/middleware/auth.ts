@@ -117,7 +117,7 @@ export class CloudflareClient {
     });
 
     if (response.status === 404) {
-      return null;
+      throw new Error(`key (${key}) not found`);
     }
 
     if (!response.ok) {

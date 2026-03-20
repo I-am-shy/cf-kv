@@ -69,7 +69,7 @@ kv.post('/:name/kv', zValidator('json', GetValuesSchema), async (c) => {
           const value = await cf.getValue(namespaceId, key);
           return { key, value };
         } catch (error) {
-          return { error: `key (${key}) not found` };
+          return { error: (error as Error).message };
         }
       })
     );
